@@ -18,6 +18,17 @@ module.exports = function(client){
 
 			"help": async function(message){
 				const m = await message.channel.send('Try harder')
+				setTimeout(function(){
+					message.channel.send('jk. Here are some commands\n\
+						$ping: Shows you how bad my connection is\n\
+						$test: test\n\
+						$help: helps\n\
+						$whoami: shows you if you pwn\'d discord yet\n\
+						$play [link]: plays bad quality stuttering music from discord\n\
+						$leave: give some privacy to the voice channel\n\
+						\
+					'.replace(/\t/g,''))//remove tabs
+				},3000)
 			},
 
 			"whoami": async function(message){
@@ -27,15 +38,29 @@ module.exports = function(client){
 			},
 			//$play https://youtube.com/watch?url 
 			"play": async function(message){
+				//get link from the string
 				var link = message.content.split(' ')[1];
+
+				//connect to the message senders voice channel
 				const connection = await message.member.voiceChannel.join();
+
+				//construct audio stream
 				const stream = ytdl(link, { filter : 'audioonly' });
-				const streamOptions = { seek: 0, volume: 1 };
+				var streamOptions = { seek: 0, volume: 1 };
+
+				//if --earrape or --FULLPOWER is passed to the command, well, you asked for it
+				if(message.content.split(' ')[2] =='--earrape') streamOptions.volume=10;
+				if(message.content.split(' ')[2] =='--FULLPOWER') streamOptions.volume=100;
+				//dispatch when audio is finished
 				const dispatcher = connection.playStream(stream, streamOptions);
 					dispatcher.on("end", end => {
-						voiceChannel.leave();
+						message.member.voiceChannel.leave()
 					 });
 				
+			},
+			"leave":async function(message){
+				//leave senders voice channel
+				message.member.voiceChannel.leave()
 			}
 
 
