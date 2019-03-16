@@ -9,6 +9,8 @@
   "author": "Metu Cyber",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.4.2"
+    "discord.js": "^11.4.2",
+    "opusscript": "0.0.6",
+    "ytdl-core": "^0.29.1"
   }
 }

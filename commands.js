@@ -1,5 +1,6 @@
-
-
+const ytdl = require('ytdl-core');
+const Discord = require("discord.js");
+const opus = require('opusscript');
 module.exports = function(client){
 
 	return {
@@ -23,6 +24,18 @@ module.exports = function(client){
 				const m = await message.channel.send('root');
 				//wait 2 seconds to send this
 				setTimeout(function(){message.channel.send('just kidding, not even user lol');},2000)
+			},
+			//$play https://youtube.com/watch?url 
+			"play": async function(message){
+				var link = message.content.split(' ')[1];
+				const connection = await message.member.voiceChannel.join();
+				const stream = ytdl(link, { filter : 'audioonly' });
+				const streamOptions = { seek: 0, volume: 1 };
+				const dispatcher = connection.playStream(stream, streamOptions);
+					dispatcher.on("end", end => {
+						voiceChannel.leave();
+					 });
+				
 			}
 
 

@@ -49,10 +49,8 @@ client.on("message", async message => {
 
 	//commands with prefix
 	if(message.content[0]==config.prefix){
-		message.content = message.content.substr(1);
-		console.log(message.content)
-		if(commands.prefix[message.content]) commands.prefix[message.content](message);
-		
+		var command = message.content.substr(1).split(' ')[0];
+		if(commands.prefix[command]) commands.prefix[command](message);
 	}
 	//special case commands that doesn't have prefix
 	else{
