@@ -106,13 +106,13 @@ var streamOptions = { seek: 0, volume: 1 };
 			//set audio level
 			"set-boost": async function(message){
 				var level = message.content.split(' ')[1];
-				dispatchers[message.guild].setVolume(level)
+				dispatchers[message.guild.id].setVolume(level)
 				if(level<=1) message.channel.send('Okay normie.');
 				else if(level<=10) message.channel.send('', {file:'https://i.kym-cdn.com/entries/icons/original/000/028/207/Screen_Shot_2019-01-17_at_4.22.43_PM.jpg'});
 				else message.channel.send('COWABUNGA IT IS!', {file:'https://i.kym-cdn.com/entries/icons/original/000/027/747/michelangelo.jpg'})
 			},
 			"normal-volume": async function(message){
-				dispatchers[message.guild].setVolume(1)
+				dispatchers[message.guild.id].setVolume(1)
 			},
 			"haxor": async function(message){
 				const m = message.channel.send('!help')
