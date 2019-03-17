@@ -12,6 +12,7 @@ var status = require('./status.json').status;
 var newstatus = 'Status will be updated on the next change';
 //when the bot is connected and logged in
 client.on("ready", () => {
+	console.log("Logged in.")
 	
 	//console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
 	
@@ -47,7 +48,7 @@ var commands = require('./commands.js')(client,panel)
 client.on("message", async message => {
 
 	//log the message
-	console.log(message.author)
+	console.log(message.content)
 	panel.io.emit('message',
 		{
 			content:message.content,
@@ -64,14 +65,15 @@ client.on("message", async message => {
 			}
 		})
 
-	//if its written by a bot, return
+	//if its written by this bot, return
 	if(message.author.id=='556245899966414867') return;  
 
 
 	//commands with prefix
 	if(message.content[0]==config.prefix){
 		var command = message.content.substr(1).split(' ')[0];
-		if(commands.prefix[command]) commands.prefix[command](message);
+		try{commands.prefix[command](message);}
+		catch(err){}
 	}
 	//special case commands that doesn't have prefix
 	else{
