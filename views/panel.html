@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+	<html lang="en">
+<HEAD>
+	<meta charset="UTF-8">
+	<title>Metu Cyber Bot Interface</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="icon" href="favicon.ico">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<!-- Styles and Fonts -->
+	<link href="https://bootswatch.com/4/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Anton|Francois+One|Roboto|Josefin+Sans|Questrial" rel="stylesheet">
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/js/socket.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</HEAD>
+	<body style="background:black">
+		<div id="banner"> <h1> Metu Cyber Bot Control Panel</h1>
+			<div style="width:49%"></div>
+			<div id="profile">
+				<div><img src='/img/profile.png' id="profile-image"></div>
+				<div id="status"> Status will be updated on the next change</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="card card-body" id="stats">
+			</div>
+		</div>
+
+
+<div class="container mt-5">
+   <div class="row mb-3">
+      <div class="col-12">
+         <div class="card">
+            <div class="card-header bg-primary text-light">
+               <h4 class="card-title"><strong class="h4">Servers</strong></h4>
+            </div>
+            <div>
+               <div class="accordion" id="server-container">
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+</body>
+</html>

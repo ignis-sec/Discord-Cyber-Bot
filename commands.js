@@ -1,7 +1,7 @@
 const ytdl = require('ytdl-core');
 const Discord = require("discord.js");
 const opus = require('opusscript');
-module.exports = function(client){
+module.exports = function(client,panel){
 
 //create a list of dispatchers for every instance of audio playing
 var dispatchers = {};
@@ -23,17 +23,28 @@ var streamOptions = { seek: 0, volume: 1 };
 				const m = await message.channel.send('Try harder')
 				setTimeout(function(){
 					message.channel.send('jk. Here are some commands\n\
-						$ping: Shows you how bad my connection is\n\
-						$test: test\n\
-						$help: helps\n\
-						$whoami: shows you if you pwn\'d discord yet\n\
-						$play [link]: plays bad quality stuttering music from discord\n\
-						$leave: give some privacy to the voice channel\n\
-						$clear [n]: Clears the last n messages\n\
-						$purge: Purges up to last 500 messages\n\
-						$set-boost: Deep fries the music\n\
-						$normal-volume: guess what it does\n\
-						\
+						\`\`\`markdown\n\
+						# $ping:\n\
+						    Shows you how bad my connection is\n\
+						# $test:\n\
+						    test\n\
+						# $help: \n\
+						    helps\n\
+						# $whoami: \n\
+						    shows you if you pwn\'d discord yet\n\
+						# $play [link]: \n\
+						    plays bad quality stuttering music from discord\n\
+						# $leave: \n\
+						    give some privacy to the voice channel\n\
+						# $clear [n]: \n\
+						    Clears the last n messages\n\
+						# $purge: \n\
+						    Purges up to last 500 messages\n\
+						# $set-boost [level 0-1 normal, 1-1000 deepfried]: \n\
+						    Deep fries the music\n\
+						# $normal-volume: \n\
+						    guess what it does\n\
+						\`\`\`\
 					'.replace(/\t/g,''))//remove tabs
 				},3000)
 			},
@@ -57,17 +68,22 @@ var streamOptions = { seek: 0, volume: 1 };
 
 				//construct audio stream
 				const stream = ytdl(link, { filter : 'audioonly' });
+				
 				//if --earrape or --FULLPOWER is passed to the command, well, you asked for it
 				if(message.content.split(' ')[2] =='--earrape') streamOptions.volume=10;
 				if(message.content.split(' ')[2] =='--FULLPOWER') streamOptions.volume=100;
-					var dispatcher = connection.playStream(stream, streamOptions);
+				
+				//create a new dispatcher to interfere with this audio stream later
+				var dispatcher = connection.playStream(stream, streamOptions);
+				
+				//store it inside dispatchers json, use guild name as key
 				dispatchers[message.guild] = dispatcher;
-				console.log("Dispatchers:")
-				console.log(dispatchers)
-					dispatcher.on("end", end => {
-						message.member.voiceChannel.leave()
-						delete dispatchers[message.guild];
-					 });
+
+				//when audio ends, remove dispatcher and leave voice channel
+				dispatcher.on("end", end => {
+					message.member.voiceChannel.leave()
+					delete dispatchers[message.guild];
+				 });
 				
 			},
 			"leave":async function(message){
@@ -84,7 +100,7 @@ var streamOptions = { seek: 0, volume: 1 };
 			},
 			//collect at max last 500 messages and delete them
 			"purge":async function(message){
-				message.channel.fetchMessages({limit:500}).then(async collected=>{
+				message.channel.fetchMessages({limit:100}).then(async collected=>{
 					message.channel.bulkDelete(collected,true);
 				})
 			},
@@ -101,7 +117,7 @@ var streamOptions = { seek: 0, volume: 1 };
 
 		},
 
-		handleNofix:function(message){
+		handleNofix:async function(message){
 
 			//if someone uses :pog: emote, respond with pog
 			if(message.content.match(/.*:pog:.*/)) {
@@ -127,7 +143,10 @@ var streamOptions = { seek: 0, volume: 1 };
 		  		message.channel.send(`lel www-data, just get a root ${head}`);
 			}
 
-
+			if(message.content.match(/.*:omegawheel:.*/)){
+				await message.channel.send("", {file: "https://discordemoji.com/assets/emoji/6976_OMEGAWHEELCHAIR.gif"});
+				message.delete()
+			}
 
 		}
 	}

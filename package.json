@@ -10,7 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.4.2",
+    "express": "^4.16.4",
     "opusscript": "0.0.6",
+    "socket.io": "^2.2.0",
     "ytdl-core": "^0.29.1"
   }
 }
