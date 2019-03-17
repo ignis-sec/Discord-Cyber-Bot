@@ -44,7 +44,7 @@ client.on("message", async message => {
 	console.log(message.content)
 
 	//if its written by a bot, return
-	if(message.author.bot) return;  
+	if(message.author.id=='556245899966414867') return;  
 
 
 	//commands with prefix
