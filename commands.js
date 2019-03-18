@@ -3,6 +3,9 @@ const Discord = require("discord.js");
 const opus = require('opusscript');
 module.exports = function(client,panel){
 
+
+
+
 //create a list of dispatchers for every instance of audio playing
 var dispatchers = {};
 var playlists = {};
@@ -86,23 +89,6 @@ var streamOptions = { seek: 0, volume: 1 };
 				message.channel.send('I\'ll show myself out then.')
 				delete dispatchers[message.guild.id];
 			},
-			//clear n messages
-			"clear":async function(message){
-				var n = message.content.split(' ')[1]
-				message.channel.fetchMessages({limit:n}).then(async collected=>{
-					message.channel.bulkDelete(collected,true).then(()=>{
-						message.channel.send('Cleared last '+n+ ' messages.')
-					})
-				})
-			},
-			//collect at max last 500 messages and delete them
-			"purge":async function(message){
-				message.channel.fetchMessages({limit:100}).then(async collected=>{
-					message.channel.bulkDelete(collected,true).then(()=>{
-						message.channel.send('Purge commencing. Please do not resist.')
-					});
-				})
-			},
 			//set audio level
 			"set-boost": async function(message){
 				var level = message.content.split(' ')[1];
@@ -132,12 +118,38 @@ var streamOptions = { seek: 0, volume: 1 };
 				dispatchers[message.guild.id].end()
 				delete dispatchers[message.guild.id];
 				play(message.guild, message.channel,null,null);
+			},
+
+
+
+
+			admin:{
+				//clear n messages
+				"clear":async function(message){
+					if(!message.member.roles.find(r => r.name === "Admin")){
+						message.reply('ALERT! ALERT! This command is not for plebs')
+						return;
+					}
+					var n = message.content.split(' ')[1]
+					message.channel.fetchMessages({limit:n}).then(async collected=>{
+						message.channel.bulkDelete(collected,true).then(()=>{
+							message.channel.send('Cleared last '+n+ ' messages.')
+						})
+					})
+				},
+				//collect at max last 500 messages and delete them
+				"purge":async function(message){
+					if(!message.member.roles.find(r => r.name === "Admin")){
+						message.reply('ALERT! ALERT! This command is not for plebs')
+						return;
+					}
+					message.channel.fetchMessages({limit:100}).then(async collected=>{
+						message.channel.bulkDelete(collected,true).then(()=>{
+							message.channel.send('Purge commencing. Please do not resist.')
+						});
+					})
+				}
 			}
-
-
-
-
-
 		},
 
 		handleNofix:async function(message){

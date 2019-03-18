@@ -1,11 +1,16 @@
 {
 	"status":[
-		"Ennumerating directories",
-		"Popping a root shell",
-		"Pwning googles system",
-		"r00ted!",
-		"0v3rfl0w1ng buff3r",
-		"bypassing authentication",
-		"Pivoting IP's"
-	]
+		{"type":0, "name":"Ennumerating directories"},
+		{"type":0, "name":"Popping a root shell"},
+		{"type":0, "name":"Pwning googles system"},
+		{"type":0, "name":"r00ted!"},
+		{"type":0, "name":"0v3rfl0w1ng buff3r"},
+		{"type":0, "name":"bypassing authentication"},
+		{"type":0, "name":"Pivoting IP's"},
+		{"type":2, "name":"to my mother"},
+		{"type":3, "name":"servers burn"},
+		{"type":3, "name":"Haxor bot eat glue"},
+		{"type":2, "name":"haxor about how it almost got that rce that one time.."}
+
+		]
 }

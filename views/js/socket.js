@@ -31,6 +31,10 @@ socket.on('audio', data=>{
 	console.log(data)
 })
 
+function requestLogout(){
+	socket.emit('logout',{});
+}
+
 function appendGuild(server){
 	var serverDiv = 
 	'<div class="card">\

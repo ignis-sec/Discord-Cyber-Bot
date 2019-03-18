@@ -25,6 +25,13 @@ io.on('connection', function (socket) {
 	socket.on('request-guilds', (data)=>{
 		io.emit('guilds', {guilds:client.guilds})
 	})
+
+	socket.on('logout', (data)=>{
+		console.log('Logging Out')
+		client.user.setStatus('available')
+		client.destroy()
+		process.exit()
+	})
 });
 
 app.get('/', (req,res)=>{
