@@ -5,7 +5,6 @@ var panel = require('./controlPanel.js')(client)
 const config = require("./config.json");
 const fs = require('fs');
 const moment = require('moment')
-client.login(config.token);
 
 var status = require('./status.json').status;
 
@@ -121,5 +120,5 @@ function createLogDirectories(guilds){
 
 
 
-
+client.login(config.token);
 

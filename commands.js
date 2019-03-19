@@ -119,6 +119,20 @@ var streamOptions = { seek: 0, volume: 1 };
 				delete dispatchers[message.guild.id];
 				play(message.guild, message.channel,null,null);
 			},
+			"regex":async function(message){
+				var exp = message.content.split(' ')[1];
+				if(!exp.match(/^\/.*\/$/) || exp.match(/\x65\x78\x65\x63/)){
+					message.channel.send('Thats not a valid regex. Please send it in form of /exp/')
+					return;
+				}
+				var string = message.content.split(' ')[2];
+				var matches = string.match(eval(exp))
+				if(matches){
+					message.channel.send('Its a match!')
+				}else
+					message.channel.send('Its not a match.')	
+				
+			},
 
 
 
