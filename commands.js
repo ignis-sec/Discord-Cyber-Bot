@@ -52,6 +52,10 @@ var streamOptions = { seek: 0, volume: 1 };
 						    shows playlist\n\
 						# $clears-playlist:\n\
 						    Clears playlist\n\
+						# $Skip:\n\
+						    Skips the current song\n\
+						# $regex [/exp/] [string]\n\
+							Checks if a regex matches\n\
 						\`\`\`\
 					'.replace(/\t/g,''))//remove tabs
 				},3000)
