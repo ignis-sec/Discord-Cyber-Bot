@@ -81,7 +81,6 @@ client.on("message", async message => {
 		try{
 			if(message.member.roles.find(r => r.name === "Admin"))
 				commands.prefix.admin[command](message);
-			else message.reply('Oi! You mate! You got a licence fo\' that command mate?')
 		}
 		catch(err){}
 	}
