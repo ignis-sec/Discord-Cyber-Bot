@@ -104,9 +104,6 @@ var streamOptions = { seek: 0, volume: 1 };
 			"normal-volume": async function(message){
 				dispatchers[message.guild.id].setVolume(1)
 			},
-			"haxor": async function(message){
-				const m = message.channel.send('!help')
-			},
 			"echo": async function(message){
 				message.delete();
 				const m = message.channel.send(message.content.split('$echo ')[1])
